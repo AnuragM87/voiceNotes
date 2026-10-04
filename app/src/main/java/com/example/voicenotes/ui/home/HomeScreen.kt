@@ -40,6 +40,9 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,8 +53,24 @@ fun HomeScreen() {
 
     var isRecording by remember { mutableStateOf(false) }
     var isPaused by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
     var currentlyPlaying by remember { mutableStateOf<File?>(null) }
-    var recordings by remember { mutableStateOf(getRecordings(context)) }
+    var recordings by remember { mutableStateOf<List<File>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        withContext(Dispatchers.IO) {
+            val fetchedRecordings = getRecordings(context)
+            recordings = fetchedRecordings
+            isLoading = false
+        }
+    }
+
+    val refreshRecordings = {
+        scope.launch(Dispatchers.IO) {
+            recordings = getRecordings(context)
+        }
+    }
 
     // Rename dialog state
     var showRenameDialog by remember { mutableStateOf(false) }
@@ -96,7 +115,7 @@ fun HomeScreen() {
                     onClick = {
                         val renamedFile = File(context.cacheDir, "$newFileName.mp3")
                         if (fileToRename!!.renameTo(renamedFile)) {
-                            recordings = getRecordings(context)
+                            refreshRecordings()
                         }
                         showRenameDialog = false
                         fileToRename = null
@@ -162,7 +181,7 @@ fun HomeScreen() {
                             recorder.stop()
                             isRecording = false
                             isPaused = false
-                            recordings = getRecordings(context)
+                            refreshRecordings()
                         } else {
                             val hasPermission = ContextCompat.checkSelfPermission(
                                 context,
@@ -192,7 +211,14 @@ fun HomeScreen() {
             }
         }
     ) { paddingValues ->
-        if (recordings.isEmpty()) {
+        if (isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize().padding(paddingValues),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (recordings.isEmpty()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -270,7 +296,7 @@ fun HomeScreen() {
                         },
                         onDeleteClick = {
                             file.delete()
-                            recordings = getRecordings(context)
+                            refreshRecordings()
                             if (currentlyPlaying == file) {
                                 player.stop()
                                 currentlyPlaying = null
