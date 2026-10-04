@@ -58,14 +58,14 @@ fun HomeScreen() {
     var fileToRename by remember { mutableStateOf<File?>(null) }
     var newFileName by remember { mutableStateOf("") }
 
-    val dateFormat = remember { SimpleDateFormat("dd-MM-yyyy-HH-mm-ss", Locale.getDefault()) }
+    val dateFormat = remember { SimpleDateFormat("dd-MM-yy_HH-mm-ss", Locale.getDefault()) }
 
     val recordPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
             if (isGranted) {
                 if (!isRecording) {
-                    val fileName = "voiceNote_${dateFormat.format(Date())}.mp3"
+                    val fileName = "${dateFormat.format(Date())}.mp3"
                     val outputFile = File(context.cacheDir, fileName)
                     recorder.start(outputFile)
                     isRecording = true
@@ -170,7 +170,7 @@ fun HomeScreen() {
                             ) == PackageManager.PERMISSION_GRANTED
 
                             if (hasPermission) {
-                                val fileName = "voiceNote_${dateFormat.format(Date())}.mp3"
+                                val fileName = "${dateFormat.format(Date())}.mp3"
                                 val outputFile = File(context.cacheDir, fileName)
                                 recorder.start(outputFile)
                                 isRecording = true
@@ -316,6 +316,18 @@ fun RecordingItem(
         label = "cardColor"
     )
 
+    val displayName = remember(file.name) {
+        val nameWithoutExt = file.nameWithoutExtension
+        if (nameWithoutExt.matches(Regex("\\d{2}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}"))) {
+            val parts = nameWithoutExt.split("_")
+            val date = parts[0]
+            val time = parts[1].replace("-", ":")
+            "$date\n$time"
+        } else {
+            nameWithoutExt
+        }
+    }
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
@@ -349,7 +361,7 @@ fun RecordingItem(
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
-                    text = file.name,
+                    text = displayName,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface
