@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.example.voicenotes.app-debug-51:/xml_file_paths.xml.flat",
+        "source": "com.example.voicenotes.app-main-53:/xml/file_paths.xml"
+    },
+    {
+        "merged": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-debug-51:/drawable_ic_launcher_mic.xml.flat",
+        "source": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-main-53:/drawable/ic_launcher_mic.xml"
+    },
+    {
+        "merged": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-debug-51:/xml_backup_rules.xml.flat",
+        "source": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-main-53:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-debug-51:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/anurag/.gradle/daemon/9.6.0/com.example.voicenotes.app-main-53:/xml/data_extraction_rules.xml"
+    }
+]

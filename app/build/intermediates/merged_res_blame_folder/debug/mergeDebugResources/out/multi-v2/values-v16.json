@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.voicenotes.app-mergeDebugResources-49:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/anurag/.gradle/caches/9.6.0/transforms/88bf28023f15f094ffd4d4f451bf9546/transformed/core-1.12.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                }
+            ]
+        }
+    ]
+}
