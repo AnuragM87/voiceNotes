@@ -108,11 +108,11 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/anurag/.gradle/cache
 	android:fullBackupContent
 		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:10:9-54
 	android:roundIcon
-		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:13:9-54
+		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:13:9-63
 	tools:targetApi
 		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:16:9-29
 	android:icon
-		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:11:9-49
+		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:11:9-58
 	android:allowBackup
 		ADDED from /Users/anurag/Documents/voiceNotes/app/src/main/AndroidManifest.xml:8:9-35
 	android:theme
