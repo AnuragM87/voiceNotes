@@ -3349,7 +3349,6 @@ androidx.compose.material.icons.filled.CloudKt
 androidx.compose.material.icons.filled.CloudOffKt
 androidx.compose.material.icons.filled.CloudQueueKt
 androidx.compose.material.icons.filled.CloudSyncKt
-androidx.compose.material.icons.filled.CloudUploadKt
 androidx.compose.material.icons.filled.Co2Kt
 androidx.compose.material.icons.filled.CoPresentKt
 androidx.compose.material.icons.filled.CodeKt
@@ -13744,7 +13743,6 @@ androidx.compose.material3.BottomSheetScaffoldState
 androidx.compose.material3.ButtonColors:
     public static final int $stable
 androidx.compose.material3.ButtonDefaults:
-    public static final int $stable
     public final androidx.compose.material3.ButtonColors elevatedButtonColors-ro_MJ88(long,long,long,long,androidx.compose.runtime.Composer,int,int)
     public final androidx.compose.material3.ButtonElevation elevatedButtonElevation-R_JCAzs(float,float,float,float,float,androidx.compose.runtime.Composer,int,int)
     public final androidx.compose.material3.ButtonColors filledTonalButtonColors-ro_MJ88(long,long,long,long,androidx.compose.runtime.Composer,int,int)
@@ -25658,7 +25656,7 @@ com.example.voicenotes.R$string
 com.example.voicenotes.R$style
 com.example.voicenotes.R$xml
 com.example.voicenotes.R
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$invoke$lambda$8$lambda$7$$inlined$items$default$2
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$invoke$lambda$9$lambda$8$$inlined$items$default$2
 com.google.common.util.concurrent.ListenableFuture:
     public abstract void addListener(java.lang.Runnable,java.util.concurrent.Executor)
 kotlin.ArrayIntrinsicsKt
@@ -35685,6 +35683,8 @@ androidx.compose.foundation.text.selection.TextSelectionMouseDetectorKt$mouseSel
 androidx.compose.foundation.text.selection.TextSelectionMouseDetectorKt
 androidx.compose.material.icons.Icons$Filled
 androidx.compose.material.icons.Icons
+androidx.compose.material.icons.filled.CloudUploadKt:
+    static void <clinit>()
 androidx.compose.material.icons.filled.DeleteKt:
     static void <clinit>()
 androidx.compose.material.icons.filled.EditKt:
@@ -35930,6 +35930,7 @@ androidx.compose.material3.ButtonColors:
     public static androidx.compose.runtime.State containerColor$material3_release()
     public static androidx.compose.runtime.State contentColor$material3_release()
 androidx.compose.material3.ButtonDefaults:
+    public static final int $stable
     public static final float ButtonHorizontalPadding
     public static final float ButtonVerticalPadding
     public static final androidx.compose.foundation.layout.PaddingValues ButtonWithIconContentPadding
@@ -35940,7 +35941,6 @@ androidx.compose.material3.ButtonDefaults:
     public static final float TextButtonHorizontalPadding
     public static final androidx.compose.foundation.layout.PaddingValues TextButtonWithIconContentPadding
     public static final float TextButtonWithIconHorizontalEndPadding
-    public static androidx.compose.material3.ButtonColors buttonColors-ro_MJ88()
     public static androidx.compose.material3.ButtonElevation buttonElevation-R_JCAzs()
     public static androidx.compose.foundation.layout.PaddingValues getContentPadding()
     public static float getMinHeight-D9Ej5fM()
@@ -39554,7 +39554,7 @@ androidx.compose.ui.graphics.vector.ImageVector:
     public static float getViewportWidth()
 androidx.compose.ui.graphics.vector.ImageVectorKt
 androidx.compose.ui.graphics.vector.PathBuilder:
-    public static androidx.compose.ui.graphics.vector.PathBuilder curveTo()
+    public final void curveTo(float,float,float,float,float,float)
     public static java.util.List getNodes()
     public final void horizontalLineTo(float)
     public final void reflectiveCurveTo(float,float,float,float)
@@ -39583,12 +39583,6 @@ androidx.compose.ui.graphics.vector.PathComponent:
     public static void updatePath()
 androidx.compose.ui.graphics.vector.PathNode$ArcTo
 androidx.compose.ui.graphics.vector.PathNode$CurveTo:
-    public final float x1
-    public final float x2
-    public final float x3
-    public final float y1
-    public final float y2
-    public final float y3
     public final float getX1()
     public final float getX2()
     public static float getX3()
@@ -44698,6 +44692,18 @@ com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-10$1:
     public final void invoke$4()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-11$1:
     public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-12$1:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-13$1:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-14$1:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-15$1:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-16$1:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-17$1:
+    public final void invoke$4()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-2$1:
     public final void invoke$28()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-3$1:
@@ -44705,9 +44711,9 @@ com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-3$1:
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-4$1:
     public final void invoke$4()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-5$1:
-    public final void invoke$4()
+    public final void invoke$28()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-6$1:
-    public final void invoke$4()
+    public final void invoke$28()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-7$1:
     public final void invoke$4()
 com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt$lambda-8$1:
@@ -44719,55 +44725,67 @@ com.example.voicenotes.ui.home.ComposableSingletons$HomeScreenKt:
     public static kotlin.jvm.functions.Function3 getLambda-1$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-10$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-11$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-12$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-13$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-14$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-15$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-16$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-17$app_release()
     public static kotlin.jvm.functions.Function3 getLambda-2$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-3$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-4$app_release()
-    public static kotlin.jvm.functions.Function2 getLambda-5$app_release()
-    public static kotlin.jvm.functions.Function2 getLambda-6$app_release()
+    public static kotlin.jvm.functions.Function3 getLambda-5$app_release()
+    public static kotlin.jvm.functions.Function3 getLambda-6$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-7$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-8$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-9$app_release()
-com.example.voicenotes.ui.home.HomeScreenKt$$InternalSyntheticLambda$1$d426d3865e152c64c332f6249a4feb9a7f7ede9f060db06f57ddb73786d16d7f$4:
+com.example.voicenotes.ui.home.HomeScreenKt$$InternalSyntheticLambda$1$d426d3865e152c64c332f6249a4feb9a7f7ede9f060db06f57ddb73786d16d7f$5:
     public final synthetic int f$0
-com.example.voicenotes.ui.home.HomeScreenKt$$InternalSyntheticLambda$3$3a30b639d052952856e18471bd45bd0e5831bb5c2d7cf890ea5db1583c9fc1f4$0:
-    public final synthetic int f$6
+com.example.voicenotes.ui.home.HomeScreenKt$$InternalSyntheticLambda$3$b701e4f07e86cafe3fc19cf65abf0bbf2f14121a81b7ecff3eec6f9690a5a9a0$0:
+    public final synthetic int f$7
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$1$1$1:
     public int label
     public final java.lang.Object invoke$2()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$1$1:
     public final java.lang.Object invoke$2()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$10$1$2:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$10$1$4:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$10:
+    public final void invoke$4()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$1$1:
+    public final void invoke$71()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$1:
+    public static void invoke$72()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$2$1$1:
+    public final void invoke$1()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$2$2$1:
+    public final void invoke$1()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$2$3$1:
+    public final void invoke$1()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$2$4$1:
+    public final void invoke$1()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$3$1$2$5$1:
+    public final void invoke$1()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$invoke$lambda$9$lambda$8$$inlined$items$default$1
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$invoke$lambda$9$lambda$8$$inlined$items$default$3:
+    public final synthetic com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$invoke$lambda$9$lambda$8$$inlined$items$default$1 $contentType
+    public final java.lang.Object invoke$11()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11$invoke$lambda$9$lambda$8$$inlined$items$default$4:
+    public final void invoke$16()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$11:
+    public static void invoke$73()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$4:
     public final void invoke$4()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$5:
     public final void invoke$4()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$6:
     public final void invoke$4()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$7$1$2:
-    public final void invoke$4()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$7$1$4:
-    public final void invoke$4()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$7:
-    public final void invoke$4()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$1$1:
-    public final void invoke$71()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$1:
-    public static void invoke$72()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$2$1$1:
-    public final void invoke$1()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$2$2$1:
-    public final void invoke$1()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$2$3$1:
-    public final void invoke$1()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$3$1$2$4$1:
-    public final void invoke$1()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$invoke$lambda$8$lambda$7$$inlined$items$default$1
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$invoke$lambda$8$lambda$7$$inlined$items$default$3:
-    public final synthetic com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$invoke$lambda$8$lambda$7$$inlined$items$default$1 $contentType
-    public final java.lang.Object invoke$11()
-com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8$invoke$lambda$8$lambda$7$$inlined$items$default$4:
-    public final void invoke$16()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$8:
-    public static void invoke$73()
+    public final void invoke$4()
+com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$9:
+    public final void invoke$4()
 com.example.voicenotes.ui.home.HomeScreenKt$HomeScreen$refreshRecordings$1$1$1:
     public int label
     public final java.lang.Object invoke$2()
@@ -44777,9 +44795,10 @@ com.example.voicenotes.ui.home.HomeScreenKt$RecordingItem$1:
     public final void invoke$71()
 com.example.voicenotes.ui.home.HomeScreenKt:
     public static final void HomeScreen$lambda$22(androidx.compose.runtime.MutableState,boolean)
+    public static final void HomeScreen$lambda$31(androidx.compose.runtime.MutableState,boolean)
     public static final void HomeScreen$lambda$4(androidx.compose.runtime.MutableState,boolean)
     public static final boolean access$HomeScreen$lambda$6(androidx.compose.runtime.MutableState)
-    public static final void access$RecordingItem$lambda$39(androidx.compose.runtime.MutableState,boolean)
+    public static final void access$RecordingItem$lambda$47(androidx.compose.runtime.MutableState,boolean)
 com.example.voicenotes.ui.theme.ThemeKt$$InternalSyntheticLambda$1$5d545b7eafe587a12b07ccb4a8259e206ea29f7fa842335b0376bb61f9d3379a$1:
     public final synthetic int f$3
     public final synthetic int f$4

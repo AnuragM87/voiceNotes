@@ -3,6 +3,7 @@ package com.example.voicenotes.ui.home
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.GraphicEq
@@ -53,6 +55,7 @@ fun HomeScreen() {
 
     var isRecording by remember { mutableStateOf(false) }
     var isPaused by remember { mutableStateOf(false) }
+
     val scope = rememberCoroutineScope()
     var currentlyPlaying by remember { mutableStateOf<File?>(null) }
     var recordings by remember { mutableStateOf<List<File>>(emptyList()) }
@@ -76,6 +79,10 @@ fun HomeScreen() {
     var showRenameDialog by remember { mutableStateOf(false) }
     var fileToRename by remember { mutableStateOf<File?>(null) }
     var newFileName by remember { mutableStateOf("") }
+    
+    // Delete dialog state
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var fileToDelete by remember { mutableStateOf<File?>(null) }
 
     val dateFormat = remember { SimpleDateFormat("dd-MM-yy_HH-mm-ss", Locale.getDefault()) }
 
@@ -98,6 +105,7 @@ fun HomeScreen() {
         currentlyPlaying = null
     }
 
+    // Rename Dialog
     if (showRenameDialog && fileToRename != null) {
         AlertDialog(
             onDismissRequest = { showRenameDialog = false },
@@ -127,6 +135,37 @@ fun HomeScreen() {
             dismissButton = {
                 TextButton(onClick = { showRenameDialog = false }) {
                     Text("Cancel")
+                }
+            }
+        )
+    }
+
+    // Delete Confirmation Dialog
+    if (showDeleteDialog && fileToDelete != null) {
+        AlertDialog(
+            onDismissRequest = { showDeleteDialog = false },
+            title = { Text("Are you sure?") },
+            text = { Text("Do you really want to delete this voice note? This action cannot be undone.") },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        fileToDelete?.delete()
+                        refreshRecordings()
+                        if (currentlyPlaying == fileToDelete) {
+                            player.stop()
+                            currentlyPlaying = null
+                        }
+                        showDeleteDialog = false
+                        fileToDelete = null
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                ) {
+                    Text("Yes, Delete")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteDialog = false; fileToDelete = null }) {
+                    Text("No, Cancel")
                 }
             }
         )
@@ -295,12 +334,8 @@ fun HomeScreen() {
                             }
                         },
                         onDeleteClick = {
-                            file.delete()
-                            refreshRecordings()
-                            if (currentlyPlaying == file) {
-                                player.stop()
-                                currentlyPlaying = null
-                            }
+                            fileToDelete = file
+                            showDeleteDialog = true
                         },
                         onRenameClick = {
                             fileToRename = file
@@ -319,6 +354,26 @@ fun HomeScreen() {
                                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                             }
                             context.startActivity(Intent.createChooser(shareIntent, "Share Voice Note"))
+                        },
+                        onSyncClick = {
+                            val uri = FileProvider.getUriForFile(
+                                context,
+                                "${context.packageName}.fileprovider",
+                                file
+                            )
+                            val syncIntent = Intent(Intent.ACTION_SEND).apply {
+                                type = "audio/mpeg"
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                                putExtra(Intent.EXTRA_TITLE, file.name)
+                                setPackage("com.google.android.apps.docs") // Targets Google Drive directly
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            try {
+                                context.startActivity(syncIntent)
+                            } catch (e: Exception) {
+                                Toast.makeText(context, "Google Drive app is not installed", Toast.LENGTH_LONG).show()
+                                context.startActivity(Intent.createChooser(syncIntent, "Sync Voice Note"))
+                            }
                         }
                     )
                 }
@@ -334,7 +389,8 @@ fun RecordingItem(
     onPlayClick: () -> Unit,
     onDeleteClick: () -> Unit,
     onRenameClick: () -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    onSyncClick: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     val cardColor by animateColorAsState(
@@ -420,6 +476,16 @@ fun RecordingItem(
                         expanded = expanded,
                         onDismissRequest = { expanded = false }
                     ) {
+                        DropdownMenuItem(
+                            text = { Text("Sync to Drive") },
+                            onClick = {
+                                expanded = false
+                                onSyncClick()
+                            },
+                            leadingIcon = {
+                                Icon(Icons.Default.CloudUpload, contentDescription = null)
+                            }
+                        )
                         DropdownMenuItem(
                             text = { Text("Share") },
                             onClick = {
