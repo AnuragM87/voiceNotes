@@ -22510,8 +22510,28 @@ androidx.core.app.ServiceCompat$Api29Impl
 androidx.core.app.ServiceCompat$Api34Impl
 androidx.core.app.ServiceCompat$StopForegroundFlags
 androidx.core.app.ServiceCompat
-androidx.core.app.ShareCompat$Api16Impl
-androidx.core.app.ShareCompat$IntentBuilder
+androidx.core.app.ShareCompat$Api16Impl:
+    private void <init>()
+androidx.core.app.ShareCompat$IntentBuilder:
+    private java.lang.CharSequence mChooserTitle
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailBcc(java.lang.String)
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailBcc(java.lang.String[])
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailCc(java.lang.String)
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailCc(java.lang.String[])
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailTo(java.lang.String)
+    public androidx.core.app.ShareCompat$IntentBuilder addEmailTo(java.lang.String[])
+    private void combineArrayExtra(java.lang.String,java.lang.String[])
+    public android.content.Intent createChooserIntent()
+    public static androidx.core.app.ShareCompat$IntentBuilder from(android.app.Activity)
+    android.content.Context getContext()
+    public androidx.core.app.ShareCompat$IntentBuilder setChooserTitle(int)
+    public androidx.core.app.ShareCompat$IntentBuilder setChooserTitle(java.lang.CharSequence)
+    public androidx.core.app.ShareCompat$IntentBuilder setEmailBcc(java.lang.String[])
+    public androidx.core.app.ShareCompat$IntentBuilder setEmailCc(java.lang.String[])
+    public androidx.core.app.ShareCompat$IntentBuilder setEmailTo(java.lang.String[])
+    public androidx.core.app.ShareCompat$IntentBuilder setHtmlText(java.lang.String)
+    public androidx.core.app.ShareCompat$IntentBuilder setText(java.lang.CharSequence)
+    public void startChooser()
 androidx.core.app.ShareCompat$IntentReader
 androidx.core.app.ShareCompat
 androidx.core.app.SharedElementCallback$OnSharedElementsReadyListener
@@ -43692,6 +43712,7 @@ androidx.core.app.NotificationManagerCompat:
 androidx.core.app.PictureInPictureModeChangedInfo:
     public final boolean mIsInPictureInPictureMode
     public final android.content.res.Configuration mNewConfig
+androidx.core.app.ShareCompat$IntentBuilder
 androidx.core.content.ContextCompat:
     public static final java.lang.Object sLock
     public static final java.lang.Object sSync

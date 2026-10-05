@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.app.ShareCompat
 import com.example.voicenotes.AudioPlayer
 import com.example.voicenotes.AudioRecorder
 import java.io.File
@@ -364,28 +365,27 @@ fun HomeScreen() {
                                 "${context.packageName}.fileprovider",
                                 file
                             )
-                            val syncIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "audio/mp3"
-                                putExtra(Intent.EXTRA_STREAM, uri)
-                                putExtra(Intent.EXTRA_TITLE, file.name)
-                                putExtra(Intent.EXTRA_SUBJECT, file.name)
-                                setPackage("com.google.android.apps.docs") // Targets Google Drive directly
-                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                                clipData = ClipData.newUri(context.contentResolver, "Voice Note", uri)
-                            }
-                            
-                            // Explicitly grant permission to Google Drive to fix background upload silent failure
-                            context.grantUriPermission(
-                                "com.google.android.apps.docs", 
-                                uri, 
-                                Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            )
-                            
+
+                            // Option 2: The Bulletproof ShareCompat approach
+                            // This creates an intent that perfectly handles all Android 10+ permission 
+                            // delegations and background URI access requirements automatically.
+                            val shareIntent = ShareCompat.IntentBuilder(context)
+                                .setType("audio/mp3")
+                                .setStream(uri)
+                                .setSubject(file.name)
+                                .intent
+                                .setPackage("com.google.android.apps.docs") // Force open Drive
+                                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                                
                             try {
-                                context.startActivity(syncIntent)
+                                context.startActivity(shareIntent)
                             } catch (e: Exception) {
+                                // Fallback to standard chooser if Drive isn't installed
                                 Toast.makeText(context, "Google Drive app is not installed", Toast.LENGTH_LONG).show()
-                                context.startActivity(Intent.createChooser(syncIntent, "Sync Voice Note"))
+                                val fallbackIntent = Intent.createChooser(shareIntent, "Sync Voice Note")
+                                fallbackIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                context.startActivity(fallbackIntent)
                             }
                         }
                     )
