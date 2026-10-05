@@ -1,6 +1,7 @@
 package com.example.voicenotes.ui.home
 
 import android.Manifest
+import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
@@ -349,9 +350,11 @@ fun HomeScreen() {
                                 file
                             )
                             val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "audio/mpeg"
+                                type = "audio/mp3"
                                 putExtra(Intent.EXTRA_STREAM, uri)
+                                putExtra(Intent.EXTRA_SUBJECT, file.name)
                                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                clipData = ClipData.newUri(context.contentResolver, "Voice Note", uri)
                             }
                             context.startActivity(Intent.createChooser(shareIntent, "Share Voice Note"))
                         },
@@ -362,12 +365,22 @@ fun HomeScreen() {
                                 file
                             )
                             val syncIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "audio/mpeg"
+                                type = "audio/mp3"
                                 putExtra(Intent.EXTRA_STREAM, uri)
                                 putExtra(Intent.EXTRA_TITLE, file.name)
+                                putExtra(Intent.EXTRA_SUBJECT, file.name)
                                 setPackage("com.google.android.apps.docs") // Targets Google Drive directly
                                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                clipData = ClipData.newUri(context.contentResolver, "Voice Note", uri)
                             }
+                            
+                            // Explicitly grant permission to Google Drive to fix background upload silent failure
+                            context.grantUriPermission(
+                                "com.google.android.apps.docs", 
+                                uri, 
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            )
+                            
                             try {
                                 context.startActivity(syncIntent)
                             } catch (e: Exception) {
